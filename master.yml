@@ -4,10 +4,14 @@
       - name: Ensure dependencies are installed.
         apt: pkg=curl state=installed
 
+      - name: install python-pycurl
+        apt: pkg=python-pycurl state=latest
+
       - name: Add Jenkins apt repository key.
         apt_key:
           url: "https://jenkins-ci.org/debian/jenkins-ci.org.key"
           state: present
+          validate_certs: no
 
       - name: Add Jenkins apt repository.
         apt_repository:
