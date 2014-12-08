@@ -28,6 +28,13 @@
       - name: Ensure Jenkins is running
         action: service name=jenkins state=started
 
+      - name: Wait for Jenkins to start
+        wait_for:
+          host=localhost
+          port=8080
+          delay=2
+          timeout=300
+
       - name: Check if job path exists
         stat: path=/var/lib/jenkins/jobs/test
         register: check_job_path
