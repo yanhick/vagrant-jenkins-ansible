@@ -44,4 +44,4 @@
         when: check_job_path.stat.exists == false
 
       - name: Install the Swarm plugin
-        shell: 'jenkins-cli -s http://localhost:8080 install-plugin swarm'
+        shell: 'jenkins-cli -s http://localhost:8080 install-plugin https://updates.jenkins-ci.org/download/plugins/swarm/1.22/swarm.hpi'
