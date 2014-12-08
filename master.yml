@@ -26,7 +26,7 @@
         apt: pkg=jenkins-cli state=installed
 
       - name: Ensure Jenkins is running
-        action: service name=jenkins state=started
+        service: name=jenkins state=started
 
       - name: Wait for Jenkins to start
         wait_for:
@@ -44,4 +44,7 @@
         when: check_job_path.stat.exists == false
 
       - name: Install the Swarm plugin
-        shell: 'jenkins-cli -s http://localhost:8080 install-plugin https://updates.jenkins-ci.org/download/plugins/swarm/1.22/swarm.hpi'
+        get_url: dest=/var/lib/jenkins/plugins url=https://updates.jenkins-ci.org/download/plugins/swarm/1.22/swarm.hpi validate_certs=no
+
+      - name: Restart Jenkins to activate the Swarm plugin
+        service: name=jenkins state=restarted

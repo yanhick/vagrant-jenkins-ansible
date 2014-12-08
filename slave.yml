@@ -26,10 +26,12 @@
         apt: pkg=jenkins state=installed
 
       - name: Download Jenkins Swarm Client
-        get_url: dest=/tmp/swarm-client.jar url=http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.22/swarm-client-1.22-jar-with-dependencies.jar
+        get_url: dest=/tmp/swarm-client.jar url=http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.22/swarm-client-1.22-jar-with-dependencies.jar owner=jenkins
 
       - name: Execute Swarm Client to start slave
-        shell: "java -jar /tmp/swarm-client.jar -master http://192.168.50.4:8080 -username vagrant -password vagrant"
+        shell: java -jar /tmp/swarm-client.jar -master http://192.168.50.4:8080 -username vagrant -password vagrant
+        async: 45
+        poll: 0
 
 
 
