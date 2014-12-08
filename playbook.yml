@@ -18,5 +18,11 @@
       - name: Ensure Jenkins is installed.
         apt: pkg=jenkins state=installed
 
+      - name: Ensure Jenkins-cli is installed.
+        apt: pkg=jenkins-cli state=installed
+
       - name: Ensure Jenkins is running
         action: service name=jenkins state=started
+
+      - name: Create a job with Jenkins-cli using an existing jobs xml
+        shell: 'jenkins-cli -s http://localhost:8080 create-job test < /vagrant/jobs/test.xml'
