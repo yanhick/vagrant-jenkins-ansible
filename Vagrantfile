@@ -14,7 +14,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "master" do |master|
       master.vm.box = "precise32"
       master.vm.box_url = "http://files.vagrantup.com/precise32.box"
+      master.vm.hostname = "master"
       master.vm.network :forwarded_port, guest: 8080, host: 1234
+      master.vm.network "private_network", ip: "192.168.50.4"
       master.vm.provision "ansible" do |ansible|
           ansible.playbook = "master.yml"
       end
@@ -23,6 +25,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "slave" do |slave|
       slave.vm.box = "precise32"
       slave.vm.box_url = "http://files.vagrantup.com/precise32.box"
+      slave.vm.hostname = "slave"
+      slave.vm.network "private_network", ip: "192.168.50.5"
   end
 
 end
