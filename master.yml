@@ -1,8 +1,11 @@
 - hosts: all
   sudo: yes
   tasks:
-      - name: Ensure dependencies are installed.
+      - name: Ensure curl is installed.
         apt: pkg=curl state=installed
+
+      - name: Ensure docker is installed
+        apt: pkg=docker.io state=installed
 
       - name: Add Jenkins apt repository key.
         apt_key:

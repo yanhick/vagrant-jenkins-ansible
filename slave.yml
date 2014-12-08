@@ -1,8 +1,11 @@
 - hosts: all
   sudo: yes
   tasks:
-      - name: Install wget package (Debian based)
+      - name: Ensure wget is installed
         action: apt pkg='wget' state=installed
+
+      - name: Ensure docker is installed
+        apt: pkg=docker.io state=installed
 
       - name: Ensure dependencies are installed.
         apt: pkg=curl state=installed
