@@ -32,7 +32,7 @@
         wait_for:
           host=localhost
           port=8080
-          delay=2
+          delay=10
           timeout=300
 
       - name: Check if job path exists
